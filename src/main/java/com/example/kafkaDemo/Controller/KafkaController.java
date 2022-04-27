@@ -1,11 +1,8 @@
-package com.example.kafkaDemo.Controller;/**
- * @author Frost
- * @date 2021/11/15 10:18
- */
-
+package com.example.kafkaDemo.Controller;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.kafkaDemo.kafka.producer.KafkaProducerService;
 import com.example.kafkaDemo.kafka.utils.KafkaUtils;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +31,9 @@ public class KafkaController {
     }
 
     @PostMapping(value = "/producer")
-    public ResponseEntity kafkaProducer(@RequestParam("message") String message) {
-        kafkaProducerService.send("kafkaTest", message);
+    public ResponseEntity kafkaProducer(@RequestParam("topic") String topic,@RequestParam("message") String message) {
+        JSONObject jsonObject = JSON.parseObject(message);
+        kafkaProducerService.send(topic, jsonObject);
         return ResponseEntity.ok(true);
     }
 }

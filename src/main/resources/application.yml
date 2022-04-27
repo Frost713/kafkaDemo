@@ -3,12 +3,12 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: 192.168.128.212:9092
+    bootstrap-servers: localhost:9092
 
 #kafka配置信息
 kafka:
   topics: kafkaTest,test_topic
-  bootstrap-servers: 192.168.128.212:9092
+  bootstrap-servers: localhost:9092
   producer:
     batch-size: 16785                                   #一次最多发送数据量
     retries: 1                                          #发送失败后的重复发送次数
